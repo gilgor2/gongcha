@@ -25,4 +25,8 @@ urlpatterns = [
     path('edit/<int:index>', views.edit, name='edit'),
     path('detail/<int:pk>/delete', views.delete, name="delete"),
     path('detail/<int:pk>/comment/<int:comment_pk>/delete/', views.delete_comment, name="delete_comment"),
+    path('tagadd/<int:pk>',views.tag_add, name="tag_add"),
+    path('tag', views.tag_home, name="tag_home"),
+    path('hashtag/<int:pk>', views.tag_detail, name="tag_detail"),
+    path('detail/<int:pk>/tag/<int:tag_pk>/delete', views.tag_delete, name="tag_delete"),
 ]

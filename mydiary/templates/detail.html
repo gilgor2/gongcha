@@ -15,6 +15,23 @@
 <a href="{%url 'delete' pk=post.pk%}">delete</a>
 
 <hr>
+<!-- tag를 입력하는 부분 -->
+<form action="{% url 'tag_add' pk=post.pk %}" method='POST'>
+    {% csrf_token %}
+    {{ tag_form.name }}
+    <input type="submit" value="해시태그 추가">
+</form>
+
+<!-- tag를 보여주는 부분 -->
+<p>
+    {% for t in post.tags.all %}
+        <b>#{{ t.name }}</b>
+        <!-- 해시태그 삭제시 코드 -->
+        <a href="{% url 'tag_delete' pk=post.pk tag_pk=t.pk %}">X</a> 
+    {% endfor %}
+</p>
+
+<hr>
 <!-- 새 댓글을 입력하는 부분 -->
 <form method='post'>
     {% csrf_token %}
