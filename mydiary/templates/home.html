@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>BABY LION DIARY</h1>
 
 <a href="{% url 'new' %}">일기 작성하기</a>
@@ -7,3 +10,5 @@
 {% for post in posts_list %}
     <a href="{% url 'detail' pk=post.pk %}">{{post.title}}</a><br>
 {% endfor %}
+
+{% endblock %}
