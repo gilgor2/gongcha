@@ -31,10 +31,13 @@ AUTH_USER_MODEL = 'login.CustomUser'
 
 
 # Application definition
+# channels app은 가장 위, 순서 바꾸지 말 것
 
 INSTALLED_APPS = [
+    'channels',
     'mydiary',
     'login',
+    'chat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,6 +75,18 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
+
+
+# Channels
+ASGI_APPLICATION = 'myproject.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 
 # Database
