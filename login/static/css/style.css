@@ -1,0 +1,15 @@
+.header_container{
+    display: flex;
+    justify-content: space-between;
+    
+
+}
+.search_container{
+    
+    border-radius: 5px;
+}
+
+.login_container{
+    
+    border-radius: 5px;
+}
