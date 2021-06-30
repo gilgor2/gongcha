@@ -31,4 +31,5 @@ urlpatterns = [
     path('detail/<int:pk>/tag/<int:tag_pk>/delete', views.tag_delete, name="tag_delete"),
     path('login/',include('login.urls')),
     path('chat/', include('chat.urls')),
+    path('search/', views.search, name="search"),
 ]

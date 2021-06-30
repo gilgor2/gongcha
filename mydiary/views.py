@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .models import Content, Comment, Tag
 from .forms import ContentForm, CommentForm, TagForm
+
+
 # Create your views here.
 def home(request):
     posts = Content.objects.all()
@@ -85,3 +87,15 @@ def tag_delete(request, pk, tag_pk):
     if tag.content_set.count() == 0 :
         tag.delete()
     return redirect('detail', pk=pk)
+
+def search(request):
+    posts = Content.objects.all().order_by('-pk')
+
+    q = request.POST.get('q',"")
+
+    if q:
+        posts = posts.filter(title__icontains=q)
+        return render(request, 'search.html', {'posts' : posts, 'q' : q})
+
+    else:
+        return render(request, 'search.html')
