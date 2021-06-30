@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>구매 대기방</h1>
-<a href="{% url 'new' %}">글 쓰기</a>
-
 <hr>
+<div class="main_top">
+    <h3>공동구매 대기방</h3>
+    <a href="{% url 'new' %}" class="atag_new btn btn-outline-success">글 쓰기</a>
+</div> 
+<br>
+
+
 {% for post in posts_list %}
     <a href="{% url 'detail' pk=post.pk %}">{{post.title}}</a><br><hr>
 {% endfor %}
