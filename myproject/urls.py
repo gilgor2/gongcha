@@ -30,4 +30,5 @@ urlpatterns = [
     path('hashtag/<int:pk>', views.tag_detail, name="tag_detail"),
     path('detail/<int:pk>/tag/<int:tag_pk>/delete', views.tag_delete, name="tag_delete"),
     path('login/',include('login.urls')),
+    path('chat/', include('chat.urls')),
 ]
