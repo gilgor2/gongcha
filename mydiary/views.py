@@ -14,7 +14,7 @@ def new(request):
         form = ContentForm(request.POST,request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
+            post.author = request.user.profile
             post.published_date = timezone.now()
             post.save()
             return redirect('home')
@@ -118,7 +118,7 @@ def post_like_toggle(request, post_id):
         profile.like_posts.remove(post)
         post.like_count -= 1
         post.save()
-    else:
+    elif post.like_count < post.limit:
         post.like_users.add(profile)
         profile.like_posts.add(post)
         post.like_count += 1

@@ -18,6 +18,7 @@ class Content(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, related_name = 'author_content')
     pub_date = models.DateTimeField(default = timezone.now)
+    limit = models.IntegerField(default=0)
     body = models.TextField(default='')
     tags = models.ManyToManyField('Tag',blank=True)
     
