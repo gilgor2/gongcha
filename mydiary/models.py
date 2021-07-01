@@ -1,12 +1,14 @@
 from __future__ import unicode_literals
 from django.utils import timezone
 from django.db import models
+from login.models import CustomUser
 
 
 # Create your models here.
 class Content(models.Model):
     objects = models.Manager() #에러를 피하기 위해 추가
     title = models.CharField(max_length=200)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
     pub_date = models.DateTimeField(default = timezone.now)
     body = models.TextField(default='')
     tags = models.ManyToManyField('Tag',blank=True)
