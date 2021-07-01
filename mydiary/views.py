@@ -113,10 +113,12 @@ def post_like_toggle(request, post_id):
     check_like_post = profile.like_posts.filter(pk=post_id)
 
     if check_like_post.exists():
+        post.like_users.remove(profile)
         profile.like_posts.remove(post)
         post.like_count -= 1
         post.save()
     else:
+        post.like_users.add(profile)
         profile.like_posts.add(post)
         post.like_count += 1
         post.save()
