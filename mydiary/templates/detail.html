@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{post.title}} <br><br>
-{{post.author}} <br>
+작성자: {{post.author.user}} <br><br>
 {모집 인원}} <br><br>
 {comment}} <br><br>
 
 <a href="{%url 'home' %}" class="btn btn-outline-success mr-3">home</a>
 
-{% if post.author == user %}
+{% if post.author.user == user %}
 <a href="{%url 'edit' index=post.pk%}" class="btn btn-outline-success mr-3">edit</a>
 
 <a href="{%url 'delete' pk=post.pk%}" class="btn btn-outline-success mr-3">delete</a>
@@ -18,6 +17,13 @@
 <hr>
 
 <div>공구 참여자 수 : {{post.like_count}}</div>
+
+<p>
+    참여자:
+    {% for u in post.like_users.all %}
+        <b>{{u.user}}</b>
+    {% endfor %}
+</p>
 
 <a href="{% url 'post_like_toggle' post.pk %}">
     {% if post in user.profile.like_posts.all %}
