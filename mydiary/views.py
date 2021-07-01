@@ -89,6 +89,7 @@ def tag_delete(request, pk, tag_pk):
         tag.delete()
     return redirect('detail', pk=pk)
 
+#검색기능
 def search(request):
     posts = Content.objects.all().order_by('-pk')
 
