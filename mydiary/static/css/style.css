@@ -38,6 +38,11 @@ h3{
     text-align : center; 
 }
 
+a.logo{
+    background-image: url(../img/gongcha.svg);
+    margin: 0 auto;
+    width: 100px;
+}
 
 .blank{
     width: 200px;

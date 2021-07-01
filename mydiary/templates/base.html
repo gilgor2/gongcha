@@ -9,7 +9,7 @@
     <header>
         {% if user.is_authenticated %} 
             <div class="blank">
-
+                    <a href="{%url 'home' %}" class="logo">logo</a>
             </div>
             <div>
                 <form action="{% url 'search' %}" method="post" >
