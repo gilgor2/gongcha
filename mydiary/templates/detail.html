@@ -17,8 +17,20 @@
 
 <hr>
 
+<div>공구 참여자 수 : {{post.like_count}}</div>
+
+<a href="{% url 'post_like_toggle' post.pk %}">
+    {% if post in user.profile.like_posts.all %}
+        취소
+    {% else %}
+        공구 참여하기
+    {% endif %}
+</a>
+
 
 {% endblock %}
+
+
 
 <!-- <h1>DIARY DETAIL</h1>
 
