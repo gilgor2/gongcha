@@ -2,15 +2,19 @@
 
 {% block content %}
 {post.title}} <br><br>
+{{post.author}} <br>
 {모집 인원}} <br><br>
 {comment}} <br><br>
 
+<a href="{%url 'home' %}" class="btn btn-outline-success mr-3">home</a>
+
+{% if post.author == user %}
+<a href="{%url 'edit' index=post.pk%}" class="btn btn-outline-success mr-3">edit</a>
+
+<a href="{%url 'delete' pk=post.pk%}" class="btn btn-outline-success mr-3">delete</a>
+{% endif %} 
 
 
-<a href="{%url 'home' %}">home</a>
-<a href="{%url 'edit' index=post.pk%}">edit</a>
-
-<a href="{%url 'delete' pk=post.pk%}">delete</a>
 <hr>
 
 

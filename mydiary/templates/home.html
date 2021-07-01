@@ -4,7 +4,9 @@
 <hr>
 <div class="main_top">
     <h3>공동구매 대기방</h3>
-    <a href="{% url 'new' %}" class="atag_new btn btn-outline-success">글 쓰기</a>
+    {% if user.is_authenticated %} 
+        <a href="{% url 'new' %}" class="atag_new btn btn-outline-success">글 쓰기</a>
+    {% endif %}
 </div> 
 <br>
 

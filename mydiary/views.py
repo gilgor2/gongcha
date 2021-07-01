@@ -36,7 +36,8 @@ def detail(request, pk):
     else :
         comment_form = CommentForm()
         tag_form = TagForm()
-    return render(request, 'detail.html', {'post':post, 'comment_list':comment_list, 'comment_form':comment_form, 'tag_form':tag_form})
+        user_name = request.user
+    return render(request, 'detail.html', {'post':post, 'comment_list':comment_list, 'comment_form':comment_form, 'tag_form':tag_form, 'user':user_name})
 
 def edit(request, index):
     post = get_object_or_404(Content, pk = index)
