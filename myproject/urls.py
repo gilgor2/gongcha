@@ -32,4 +32,5 @@ urlpatterns = [
     path('login/',include('login.urls')),
     path('chat/', include('chat.urls')),
     path('search/', views.search, name="search"),
+    path('like/<int:post_id>/', views.post_like_toggle, name="post_like_toggle"),
 ]
