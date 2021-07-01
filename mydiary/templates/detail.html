@@ -2,7 +2,7 @@
 
 {% block content %}
 작성자: {{post.author.user}} <br><br>
-{모집 인원}} <br><br>
+모집 인원: {{post.limit}} <br><br>
 {comment}} <br><br>
 
 <a href="{%url 'home' %}" class="btn btn-outline-success mr-3">home</a>
@@ -28,6 +28,8 @@
 <a href="{% url 'post_like_toggle' post.pk %}">
     {% if post in user.profile.like_posts.all %}
         취소
+    {% elif post.like_count >= post.limit%}
+        모집 완료
     {% else %}
         공구 참여하기
     {% endif %}
