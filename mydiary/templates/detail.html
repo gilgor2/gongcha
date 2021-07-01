@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{post.title}} <br><br>
+{{post.title}} <br><br>
 {{post.author}} <br>
 {모집 인원}} <br><br>
 {comment}} <br><br>
@@ -17,9 +17,9 @@
 
 <hr>
 
-<div>공구 참여자 수 : {{post.like_count}}</div>
+<div >공구 참여자 수 : {{post.like_count}}</div>
 
-<a href="{% url 'post_like_toggle' post.pk %}">
+<a href="{% url 'post_like_toggle' post.pk %}" class="btn btn-outline-success mr-3">
     {% if post in user.profile.like_posts.all %}
         취소
     {% else %}
