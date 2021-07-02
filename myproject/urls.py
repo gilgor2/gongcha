@@ -1,3 +1,4 @@
+# myproject/urls.py
 """myproject URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -29,9 +30,9 @@ urlpatterns = [
     path('tag', views.tag_home, name="tag_home"),
     path('hashtag/<int:pk>', views.tag_detail, name="tag_detail"),
     path('detail/<int:pk>/tag/<int:tag_pk>/delete', views.tag_delete, name="tag_delete"),
-    path('login/',include('login.urls')),
-    path('chat/', include('chat.urls')),
     path('search/', views.search, name="search"),
     path('like/<int:post_id>/', views.post_like_toggle, name="post_like_toggle"),
+    path('login/',include('login.urls')),
+    path('chat/', include('chat.urls')),
     path('profile_create/', views.profile_create , name="profile_create"),
 ]

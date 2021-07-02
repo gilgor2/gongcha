@@ -1,3 +1,4 @@
+# login/forms.py
 from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
 class SignupForm(UserCreationForm):
