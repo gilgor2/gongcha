@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{post.title}} <br><br>
-작성자: {{post.author.user}} <br><br>
-모집 인원: {{post.limit}} <br><br>
-{comment}} <br><br>
+<div class="detail_form">
+    <h2>{{post.title}}</h2> <br><br>
+    작성자: {{post.author.user}} <br><br>
+    모집 인원: {{post.limit}} <br><br>
+{{post.body}} <br><br>
+</div>
+
 
 <a href="{%url 'home' %}" class="btn btn-outline-success mr-3">home</a>
 
@@ -17,12 +20,12 @@
 
 <hr>
 
-<div >공구 참여자 수 : {{post.like_count}}</div>
+<div >공구 참여자 수 : {{post.like_count}}/{{post.limit}}</div>
 
 <p>
-    참여자:
+    참여자: <br>
     {% for u in post.like_users.all %}
-        <b>{{u.user}}</b>
+        <b>-{{u.user}}</b><br>
     {% endfor %}
 </p>
 

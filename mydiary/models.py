@@ -19,7 +19,7 @@ class Content(models.Model):
     author = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, related_name = 'author_content')
     pub_date = models.DateTimeField(default = timezone.now)
     limit = models.IntegerField(default=0)
-    body = models.TextField(default='')
+    body = models.TextField(default='', max_length="100")
     tags = models.ManyToManyField('Tag',blank=True)
     
     like_users = models.ManyToManyField(Profile, blank=True, related_name = 'like_users_content')

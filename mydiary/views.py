@@ -45,7 +45,7 @@ def edit(request, index):
         form = ContentForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
+            post.author = request.user.profile
             post.published_date = timezone.now
             post.save()
             return redirect('detail', pk=post.pk)
