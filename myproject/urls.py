@@ -34,4 +34,5 @@ urlpatterns = [
     path('like/<int:post_id>/', views.post_like_toggle, name="post_like_toggle"),
     path('login/',include('login.urls')),
     path('chat/', include('chat.urls')),
+    path('profile_create/', views.profile_create , name="profile_create"),
 ]

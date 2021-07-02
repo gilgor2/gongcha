@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{post.title}} <br><br>
-작성자: {{post.author.user}} <br><br>
-모집 인원: {{post.limit}} <br><br>
-{comment}} <br><br>
+<div class="detail_form">
+    <h2>{{post.title}}</h2> <br><br>
+    작성자: {{post.author.user}} <br><br>
+    모집 인원: {{post.limit}} <br><br>
+{{post.body}} <br><br>
+</div>
 
 <a href="{%url 'home' %}" class="btn btn-outline-success mr-3">home</a>
 
@@ -17,16 +19,16 @@
 
 <hr>
 
-<div >공구 참여자 수 : {{post.like_count}}</div>
+<div >공구 참여자 수 : {{post.like_count}}/{{post.limit }}</div>
 
 <p>
-    참여자:
+    참여자: <br>    
     {% for u in post.like_users.all %}
-        <b>{{u.user}}</b>
+        <b>-{{u.user}}</b><br>
     {% endfor %}
 </p>
-
-<a href="{% url 'post_like_toggle' post.pk %}" class="btn btn-outline-success mr-3">
+{% if user.is_authenticated %}
+<a href="{% url 'post_like_toggle' post.pk %}" class="btn btn-outline-success mr-5">
     {% if post in user.profile.like_posts.all %}
         취소
     {% elif post.like_count >= post.limit%}
@@ -35,22 +37,13 @@
         공구 참여하기
     {% endif %}
 </a>
+{% endif %}
+</a>
+{% if post in user.profile.like_posts.all %}
+    <a href="{%url 'index' %}" class="btn btn-outline-success mr-3">채팅방 입장</a>
+{% endif %}
 
 
 {% endblock %}
 
 
-
-<!-- <h1>DIARY DETAIL</h1>
-
-<div>
-    {% if post.pub_date %}
-        <div>
-            {{post.pub_date}}
-        </div>
-    {%endif%}
-    <h1>{{post.title}}</h1>
-    <p>작성자: {{post.author}}</p>
-    <p>{{post.body|linebreaks}}</p>
-</div>
- -->

@@ -2,9 +2,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .models import Profile, Content, Comment, Tag
-from .forms import ContentForm, CommentForm, TagForm
+from .forms import ContentForm, CommentForm, ProfileForm, TagForm
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 # Create your views here.
 def home(request):
     posts = Content.objects.all()
@@ -15,9 +15,17 @@ def new(request):
         form = ContentForm(request.POST,request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
+            user = request.user
+            profile = Profile.objects.get(user=user)
             post.author = request.user.profile
             post.published_date = timezone.now()
             post.save()
+
+            post.like_users.add(profile)
+            profile.like_posts.add(post)
+            post.like_count += 1
+            post.save()
+            
             return redirect('home')
     else:
         form = ContentForm()
@@ -109,7 +117,7 @@ def search(request):
 @login_required
 def post_like_toggle(request, post_id):
     post = get_object_or_404(Content, pk=post_id)
-    profile = request.user.profile
+    profile = request.user.profile   
     check_like_post = profile.like_posts.filter(pk=post_id)
 
     if check_like_post.exists():
@@ -124,3 +132,19 @@ def post_like_toggle(request, post_id):
         post.save()
 
     return redirect('detail', post_id)
+
+#profile생성기능
+@login_required
+def profile_create(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            messages.add_message(request, messages.INFO, 'Welcome!! Now you can enjoy our community!')
+            return redirect('home') 
+    else:
+        form = ProfileForm()
+    
+    return render(request, 'profile_create.html', {'form':form})
