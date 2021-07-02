@@ -14,9 +14,17 @@ def new(request):
         form = ContentForm(request.POST,request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
+            user = request.user
+            profile = Profile.objects.get(user=user)
             post.author = request.user.profile
             post.published_date = timezone.now()
             post.save()
+
+            post.like_users.add(profile)
+            profile.like_posts.add(post)
+            post.like_count += 1
+            post.save()
+            
             return redirect('home')
     else:
         form = ContentForm()
@@ -110,6 +118,8 @@ def post_like_toggle(request, post_id):
     post = get_object_or_404(Content, pk=post_id)
     user = request.user
     profile = Profile.objects.get(user=user)
+        
+    
 
     check_like_post = profile.like_posts.filter(pk=post_id)
 
@@ -118,7 +128,7 @@ def post_like_toggle(request, post_id):
         profile.like_posts.remove(post)
         post.like_count -= 1
         post.save()
-    elif post.like_count < post.limit:
+    elif post.like_count < post.limit :
         post.like_users.add(profile)
         profile.like_posts.add(post)
         post.like_count += 1
