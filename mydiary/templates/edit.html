@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <form method="POST">
     {%csrf_token%}
-    
     제목: <input type="text" name="title" placeholder=" 장소와 품목을 입력해주세요!" id="id_title" size="60" value="{{ form.title }}"> <br>
     모집인원: <input type="number" name="limit" id="id_limit" value="{{ form.limit }}"> <br><br>
-    <textarea name="body" cols="80" rows="6" maxlength="100" id="id_body" value="{{ form.body }}"></textarea><br><br>
+    <textarea name="body" cols="80" rows="6" maxlength="100" id="id_body" >{{ form.body }}</textarea><br><br>
     <button type="submit">저장</button>
 </form>
 {% endblock %}

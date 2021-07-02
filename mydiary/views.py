@@ -58,7 +58,7 @@ def edit(request, index):
             post.save()
             return redirect('detail', pk=post.pk)
     else:
-        form = ContentForm(instance=post)
+        form = post
     return render(request, 'edit.html',{'form':form})
 
 def delete(request,pk):
