@@ -1,3 +1,4 @@
+# mydiary/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .models import Profile, Content, Comment, Tag
@@ -45,7 +46,7 @@ def edit(request, index):
         form = ContentForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
+            post.author = request.user.profile
             post.published_date = timezone.now
             post.save()
             return redirect('detail', pk=post.pk)
@@ -108,9 +109,7 @@ def search(request):
 @login_required
 def post_like_toggle(request, post_id):
     post = get_object_or_404(Content, pk=post_id)
-    user = request.user
-    profile = Profile.objects.get(user=user)
-
+    profile = request.user.profile
     check_like_post = profile.like_posts.filter(pk=post_id)
 
     if check_like_post.exists():

@@ -1,8 +1,8 @@
+# login/views.py
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from .forms import SignupForm
-# Create your views here.
 
 def signup_view(request):
     if request.method=="POST":
