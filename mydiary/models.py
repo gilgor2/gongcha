@@ -8,6 +8,8 @@ from login.models import CustomUser
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
+    bio = models.TextField(default='', blank=True)
+    birthday = models.DateField(default = timezone.now ,null=True)
     like_posts = models.ManyToManyField('Content', blank=True, related_name='like_posts_profile')
 
     def __str__(self):

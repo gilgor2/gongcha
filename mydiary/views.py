@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .models import Profile, Content, Comment, Tag
-from .forms import ContentForm, CommentForm, TagForm
+from .forms import ContentForm, CommentForm, ProfileForm, TagForm
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 # Create your views here.
 def home(request):
     posts = Content.objects.all()
@@ -125,3 +125,19 @@ def post_like_toggle(request, post_id):
         post.save()
 
     return redirect('detail', post_id)
+
+#profile생성기능
+login_required
+def profile_create(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            messages.add_message(request, messages.INFO, 'Welcome!! Now you can enjoy our community!')
+            return redirect('home') 
+    else:
+        form = ProfileForm()
+    
+    return render(request, 'profile_create.html', {'form':form})
