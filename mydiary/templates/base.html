@@ -9,7 +9,7 @@
     <header>
         {% if user.is_authenticated %} 
             <div class="blank">
-                    <a href="{%url 'home' %}" ><img src="img/gongcha.svg" alt="Gongcha"></a>
+                    <a href="{%url 'home' %}" ><img src="img/gongcha.svg" alt="동만나"></a>
             </div>
             <div>
                 <form action="{% url 'search' %}" method="post" >
